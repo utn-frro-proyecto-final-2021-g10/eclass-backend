@@ -1,24 +1,24 @@
-const express = require('express'); // Express
+import express, { json, urlencoded } from 'express'; // Express
 const app = express();
 
-const dotenv = require('dotenv'); // Environment Variables
-dotenv.config();
+import { config } from 'dotenv'; // Environment Variables
+config();
 
-const morgan = require('morgan'); // Morgan
+import morgan from 'morgan'; // Morgan
 app.use(morgan('dev'));
 
-const cors = require('cors'); // CORS
+import cors from 'cors'; // CORS
 app.use(cors());
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })) //application/x-www-form-urlencoded
+app.use(json());
+app.use(urlencoded({ extended: true })) //application/x-www-form-urlencoded
 
-const mongoose = require('mongoose');// Mongoose
+import { connect } from 'mongoose';// Mongoose
 const USER = process.env['DATABASE_USER'];
 const DBCLUSTER = process.env['DATABASE_CLUSTER'];
 const DBNAME = process.env['DATABASE_NAME'];
 const DBPASSWORD = process.env['DATABASE_PASSWORD'];
-mongoose.connect(`mongodb+srv://${USER}:${DBPASSWORD}@${DBCLUSTER}.mongodb.net/${DBNAME}?retryWrites=true&w=majority`, {
+connect(`mongodb+srv://${USER}:${DBPASSWORD}@${DBCLUSTER}.mongodb.net/${DBNAME}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 });
 
 // Models
-require('./models/User');
+import './models/User';
 //require('./models/Course);
 
 app.use(require('./routes'));

@@ -1,8 +1,8 @@
-const express = require('express'); // Express
-const mongoose = require('mongoose'); // Mongoose
-const router = express.Router();
+import { Router } from 'express'; // Express
+import { model } from 'mongoose'; // Mongoose
+const router = Router();
 
-const User = mongoose.model('User');
+const User = model('User');
 
 // Create
 router.post('/', async (req, res) => {
@@ -61,4 +61,4 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
