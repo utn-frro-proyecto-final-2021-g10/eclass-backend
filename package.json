@@ -15,12 +15,14 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.8",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "swagger-tools": "^0.10.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
-    "@babel/preset-env": "^7.10.2"
+    "@babel/preset-env": "^7.10.2",
+    "nodemon": "^2.0.13"
   }
 }

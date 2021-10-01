@@ -1,35 +1,42 @@
-import express, { json, urlencoded } from 'express'; // Express
+const express = require('express'); // Express
 const app = express();
 
-import { config } from 'dotenv'; // Environment Variables
-config();
+const dotenv = require('dotenv'); // Environment Variables
+dotenv.config();
 
-import morgan from 'morgan'; // Morgan
+const morgan = require('morgan'); // Morgan
 app.use(morgan('dev'));
 
-import cors from 'cors'; // CORS
+const cors = require('cors'); // CORS
 app.use(cors());
 
-app.use(json());
-app.use(urlencoded({ extended: true })) //application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })) //application/x-www-form-urlencoded
 
-import { connect } from 'mongoose';// Mongoose
+const mongoose = require('mongoose');// Mongoose
 const USER = process.env['DATABASE_USER'];
 const DBCLUSTER = process.env['DATABASE_CLUSTER'];
 const DBNAME = process.env['DATABASE_NAME'];
 const DBPASSWORD = process.env['DATABASE_PASSWORD'];
-connect(`mongodb+srv://${USER}:${DBPASSWORD}@${DBCLUSTER}.mongodb.net/${DBNAME}?retryWrites=true&w=majority`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+let uri = `mongodb+srv://${USER}:${DBPASSWORD}@${DBCLUSTER}.mongodb.net/${DBNAME}?retryWrites=true&w=majority`;
+mongoose.connect(uri)
+        .then(
+          () =>{
+            console.log("Connected to mongo...");
+          }
+        )
+        .catch(
+          (err) => {
+            console.log(`Failed to connect to Mongo ${err}`);
+          }
+        );
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
 // Models
-import './models/User';
+require('./models/User');
 //require('./models/Course);
 
 app.use(require('./routes'));
