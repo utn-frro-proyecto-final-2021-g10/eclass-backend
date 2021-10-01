@@ -1,6 +1,8 @@
 const express = require('express'); // Express
 const app = express();
 
+const fs = require('fs');
+
 const dotenv = require('dotenv'); // Environment Variables
 dotenv.config();
 
@@ -22,7 +24,7 @@ let uri = `mongodb+srv://${USER}:${DBPASSWORD}@${DBCLUSTER}.mongodb.net/${DBNAME
 mongoose.connect(uri)
         .then(
           () =>{
-            console.log("Connected to mongo...");
+            console.log("Connected to mongo succesfully...");
           }
         )
         .catch(
@@ -32,7 +34,14 @@ mongoose.connect(uri)
         );
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  
+  fs.readFile("index.html", (err, html) => {
+    if (err) {
+      console.log(err);
+    }
+    res.write(html);
+    res.send();
+  })
 });
 
 // Models
