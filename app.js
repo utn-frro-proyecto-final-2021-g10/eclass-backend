@@ -44,6 +44,12 @@ app.get('/', function (req, res) {
   })
 });
 
+// import library and files
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+// let express to use this
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Models
 require('./models/User');
 //require('./models/Course);
