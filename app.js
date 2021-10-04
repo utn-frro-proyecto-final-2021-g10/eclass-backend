@@ -51,8 +51,7 @@ const swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Models
-require('./models/User');
-//require('./models/Course);
+require('./models');
 
 app.use(require('./routes'));
 

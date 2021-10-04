@@ -1,15 +1,15 @@
 const express = require('express'); // Express
 const mongoose = require('mongoose'); // Mongoose
 const router = express.Router();
-const User = mongoose.model('User');
 
+const Course = mongoose.model('Course');
 
 // Create
 router.post('/', async (req, res) => {
   const body = req.body;
   try {
-      const userDb = await User.create(body);
-      res.status(200).json(userDb);
+      const courseDB = await Course.create(body);
+      res.status(200).json(courseDB);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error)
@@ -20,8 +20,8 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const _id = req.params.id;
   try {
-    const userDb = await User.findById(_id);
-    res.json(userDb);
+    const courseDB = await Course.findById(_id);
+    res.json(courseDB);
   } catch (error) {
     return res.status(400).json(error)
   }
@@ -30,9 +30,8 @@ router.get('/:id', async (req, res) => {
 // Get All
 router.get('/', async (req, res) => {
   try {
-    
-    const userDb = await User.find();
-    res.json(userDb);
+    const courseDB = await Course.find();
+    res.json(courseDB);
   } catch (error) {
     return res.status(400).json(error)
   }
@@ -42,8 +41,8 @@ router.get('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const _id = req.params.id;
   try {
-    const userDb = await User.findByIdAndDelete(_id);
-    res.json(userDb);
+    const courseDB = await Course.findByIdAndDelete(_id);
+    res.json(courseDB);
   } catch (error) {
     return res.status(500).json(error)
   }
@@ -54,10 +53,10 @@ router.put('/:id', async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
   try {
-    const userDb = await User.findByIdAndUpdate(_id, body, {
+    const courseDB = await Course.findByIdAndUpdate(_id, body, {
       new: true,
     });
-    res.json(userDb);
+    res.json(courseDB);
   } catch (error) {
     return res.status(500).json(error)
   }

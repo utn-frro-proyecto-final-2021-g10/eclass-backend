@@ -7,29 +7,32 @@ const validateEmail = (email) => { // emailregex.com
 };
 
 const userSchema = new Schema({
+  type: {
+    type: String, 
+    required: 'Type is required',
+  },
   name: {
     type: String,
     required: 'Name is required',
   },
-  surname: {
+  lastName:{
     type: String,
-    required: 'Surname is required',
+    required: 'Last Name is required'
   },
-  username: {
-    type: String,
-    required: 'Username is required',
+  schoolID: {
+    type: Number
+  },
+  dateOfBirth: {
+    type: Date
   },
   email: {
     type: String,
     validate: [validateEmail, 'Please fill a valid email address'],
     required: 'Email address is required',
   },
-  birthdate: {
-    type: Date,
-  },
-  country: {
-    type: String,
-  },
+  token: {
+    type: String
+  }
 }, {
   timestamps: true,
 });
