@@ -1,6 +1,8 @@
 const mongoose = require('mongoose'); // Mongoose
 const Schema = mongoose.Schema;
 
+const userSchema = require('./User').schema;
+
 const fileSchema = new Schema({
   link: {
     type: String,

@@ -18,9 +18,6 @@ const taskSchema = new Schema({
   description: {
     type: String,
   },
-  classwork: {
-    type: [categorySchema],
-  },
   form: {
     type: formSchema,
   },

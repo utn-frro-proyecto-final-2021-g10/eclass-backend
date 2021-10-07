@@ -6,7 +6,7 @@ const fullFormSchema = require('./FullForm').schema;
 const forumSchema = require('./Forum').schema;
 const taskSchema = require('./Task').schema;
 
-const courseSchema = new Schema({
+const answerSchema = new Schema({
   user: {
     type: userSchema, 
     required: 'user is required',
@@ -25,4 +25,4 @@ const courseSchema = new Schema({
   timestamps: true,
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+module.exports = mongoose.model('Answer', answerSchema);
