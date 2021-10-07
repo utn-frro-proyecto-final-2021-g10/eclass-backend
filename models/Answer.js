@@ -2,32 +2,25 @@ const mongoose = require('mongoose'); // Mongoose
 const Schema = mongoose.Schema;
 
 const userSchema = require('./User').schema;
-const categorySchema = require('./Category').schema;
+const fullFormSchema = require('./FullForm').schema;
 const forumSchema = require('./Forum').schema;
 const taskSchema = require('./Task').schema;
 
 const courseSchema = new Schema({
-  name: {
-    type: String, 
-    required: 'Type is required',
+  user: {
+    type: userSchema, 
+    required: 'user is required',
   },
-  owner: {
-    type: userSchema,
-    required: 'Owner is required',
+  form: {
+    type: fullFormSchema,
+    required: 'form is required',
   },
-  members: {
-    type: [userSchema],
+  dateSubmitted: {
+    type: Date
   },
-  classwork: {
-    type: [categorySchema],
-  },
-  forum: {
-    type: forumSchema,
-  },
-  tasks: {
-    type: [taskSchema],
-  },
-
+  score: {
+    type: Number
+  }
 }, {
   timestamps: true,
 });

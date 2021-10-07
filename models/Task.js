@@ -1,35 +1,35 @@
 const mongoose = require('mongoose'); // Mongoose
 const Schema = mongoose.Schema;
 
-const userSchema = require('./User').schema;
-const categorySchema = require('./Category').schema;
-const forumSchema = require('./Forum').schema;
-const taskSchema = require('./Task').schema;
+const formSchema = require('./Form').schema;
+const answerSchema = require('./Answer').schema;
 
-const courseSchema = new Schema({
+const taskSchema = new Schema({
+  dateStart: {
+    type: Date
+  },
+  dateEnd: {
+    type: Date,
+    required: "dateEnd is required"
+  },
   name: {
-    type: String, 
-    required: 'Type is required',
+    type: String
   },
-  owner: {
-    type: userSchema,
-    required: 'Owner is required',
-  },
-  members: {
-    type: [userSchema],
+  description: {
+    type: String,
   },
   classwork: {
     type: [categorySchema],
   },
-  forum: {
-    type: forumSchema,
+  form: {
+    type: formSchema,
   },
-  tasks: {
-    type: [taskSchema],
+  answers: {
+    type: [answerSchema],
   },
 
 }, {
   timestamps: true,
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+module.exports = mongoose.model('Task', taskSchema);
